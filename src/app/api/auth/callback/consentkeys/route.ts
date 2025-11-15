@@ -105,8 +105,9 @@ export async function GET(request: NextRequest) {
 
     // Clear OAuth cookies and set session cookie
     const isProduction = process.env.NODE_ENV === 'production';
+    const baseUrl = process.env.NEXT_PUBLIC_APP_URL || request.url;
     const response = NextResponse.redirect(
-      new URL('/assessment?auth=success', request.url)
+      new URL('/assessment?auth=success', baseUrl)
     );
 
     response.cookies.delete('oauth_state');
