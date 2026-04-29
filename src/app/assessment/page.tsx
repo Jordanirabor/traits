@@ -468,7 +468,8 @@ export default function AssessmentPage() {
                 )}
               </div>
               <p className="text-sm md:text-base text-muted-foreground mt-1">
-                Complete frameworks you know for personalized insights
+                Fill in what you know — even 2 traits unlock personalized
+                insights
               </p>
             </div>
           </div>
@@ -545,16 +546,85 @@ export default function AssessmentPage() {
         </Accordion>
 
         {/* View Results Button */}
-        <div className="mt-8 flex justify-center">
-          <Button
-            size="lg"
-            onClick={handleViewResults}
-            className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12"
-            aria-label="View my personality insights"
-          >
-            View My Insights
-            <Sparkles className="ml-2 h-4 w-4" aria-hidden="true" />
-          </Button>
+        <div className="mt-8 space-y-4">
+          {/* Progress indicator */}
+          {(() => {
+            const completedCount = [
+              data.bigFive,
+              data.mbti,
+              data.enneagram,
+              data.zodiacSign,
+              data.chineseZodiac,
+              data.humanDesign,
+              data.attachmentStyle,
+              data.loveLanguages && data.loveLanguages.length > 0 ? true : null,
+            ].filter(Boolean).length;
+
+            return (
+              <div className="text-center space-y-3">
+                <div className="flex items-center justify-center gap-2">
+                  {Array.from({ length: 8 }).map((_, i) => (
+                    <div
+                      key={i}
+                      className={`h-2 w-8 rounded-full transition-colors ${
+                        i < completedCount ? 'bg-primary' : 'bg-muted'
+                      }`}
+                    />
+                  ))}
+                </div>
+                <p className="text-sm text-muted-foreground">
+                  {completedCount === 0 && (
+                    <>
+                      Pick any trait to get started — you don&apos;t need them
+                      all
+                    </>
+                  )}
+                  {completedCount === 1 && (
+                    <>
+                      Nice start! Add one more for richer, cross-framework
+                      insights
+                    </>
+                  )}
+                  {completedCount >= 2 && completedCount < 5 && (
+                    <>
+                      <span className="font-medium text-primary">
+                        {completedCount} traits completed
+                      </span>{' '}
+                      — enough for great insights. More data = deeper analysis
+                    </>
+                  )}
+                  {completedCount >= 5 && completedCount < 8 && (
+                    <>
+                      <span className="font-medium text-primary">
+                        {completedCount} of 8 traits
+                      </span>{' '}
+                      — your insights will be very detailed
+                    </>
+                  )}
+                  {completedCount === 8 && (
+                    <>
+                      <span className="font-medium text-primary">
+                        All traits completed!
+                      </span>{' '}
+                      Your insights will be comprehensive
+                    </>
+                  )}
+                </p>
+              </div>
+            );
+          })()}
+
+          <div className="flex justify-center">
+            <Button
+              size="lg"
+              onClick={handleViewResults}
+              className="bg-primary text-primary-foreground hover:bg-primary/90 px-8 h-12"
+              aria-label="View my personality insights"
+            >
+              View My Insights
+              <Sparkles className="ml-2 h-4 w-4" aria-hidden="true" />
+            </Button>
+          </div>
         </div>
       </div>
     </div>

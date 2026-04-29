@@ -29,7 +29,9 @@ export default function Home() {
           </h1>
           <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-8 leading-relaxed">
             A free tool for exploring and comparing different personality
-            systems to encourage self-discovery and growth.
+            systems to encourage self-discovery and growth. Pick as few as 2
+            traits and get personalized insights — the more you add, the deeper
+            they get.
           </p>
           <Button
             size="lg"
