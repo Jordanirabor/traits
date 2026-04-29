@@ -279,8 +279,8 @@ export default function ResultsPage() {
           <h1 className="text-3xl font-bold mb-4">Start Your Journey</h1>
           <p className="text-muted-foreground mb-8 max-w-xl mx-auto text-lg">
             Add personality data to generate personalized insights. You
-            don&apos;t need to complete all traits — insights are generated
-            based on whatever data you provide.
+            don&apos;t need to complete all traits. Insights are generated based
+            on whatever data you provide.
           </p>
           <Button size="lg" onClick={() => router.push('/assessment')}>
             Add Your Data →

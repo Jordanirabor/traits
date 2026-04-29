@@ -468,7 +468,7 @@ export default function AssessmentPage() {
                 )}
               </div>
               <p className="text-sm md:text-base text-muted-foreground mt-1">
-                Fill in what you know — even 2 traits unlock personalized
+                Fill in what you know. Even 2 traits unlock personalized
                 insights
               </p>
             </div>
@@ -575,7 +575,7 @@ export default function AssessmentPage() {
                 <p className="text-sm text-muted-foreground">
                   {completedCount === 0 && (
                     <>
-                      Pick any trait to get started — you don&apos;t need them
+                      Pick any trait to get started. You don&apos;t need them
                       all
                     </>
                   )}
@@ -590,7 +590,7 @@ export default function AssessmentPage() {
                       <span className="font-medium text-primary">
                         {completedCount} traits completed
                       </span>{' '}
-                      — enough for great insights. More data = deeper analysis
+                      . Enough for great insights. More data = deeper analysis
                     </>
                   )}
                   {completedCount >= 5 && completedCount < 8 && (
@@ -598,7 +598,7 @@ export default function AssessmentPage() {
                       <span className="font-medium text-primary">
                         {completedCount} of 8 traits
                       </span>{' '}
-                      — your insights will be very detailed
+                      . Your insights will be very detailed
                     </>
                   )}
                   {completedCount === 8 && (
