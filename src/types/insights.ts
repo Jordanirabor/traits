@@ -1,4 +1,4 @@
-// Individual insight structure
+// Individual insight structure (client-side analysis engine)
 export interface Insight {
   id: string;
   title: string;
@@ -9,7 +9,7 @@ export interface Insight {
   sources: string[];
 }
 
-// Analysis results structure
+// Client-side analysis results structure
 export interface AnalysisResults {
   selfImprovement: Insight[];
   strengths: Insight[];
@@ -17,6 +17,25 @@ export interface AnalysisResults {
   redFlags: Insight[];
   confidence: number;
   completeness: number;
+}
+
+// n8n AI-generated insights (markdown or structured)
+export interface N8nInsightsResponse {
+  output?: string; // Markdown content from n8n
+  // Fallback structured format
+  selfImprovement?: N8nInsight[];
+  strengths?: N8nInsight[];
+  selfGreenFlags?: N8nInsight[];
+  selfRedFlags?: N8nInsight[];
+  partnerGreenFlags?: N8nInsight[];
+  partnerRedFlags?: N8nInsight[];
+}
+
+export interface N8nInsight {
+  title: string;
+  content: string;
+  reasoning?: string;
+  action?: string;
 }
 
 // Completeness report

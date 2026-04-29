@@ -1,5 +1,6 @@
 'use client';
 
+import { useAuth } from '@/components/auth/AuthProvider';
 import { ErrorDisplay } from '@/components/common/ErrorBoundary';
 import { AssessmentSkeleton } from '@/components/common/LoadingSkeleton';
 import {
@@ -16,7 +17,6 @@ import {
   toCurrentFormat,
   toReferenceFormat,
 } from '@/lib/adapters/personalityDataAdapter';
-import { useSession } from '@/lib/auth/authClient';
 import { PersonalityData } from '@/types/personality';
 import {
   Activity,
@@ -94,7 +94,7 @@ const HumanDesignInput = dynamic(
 
 export default function AssessmentPage() {
   const router = useRouter();
-  const { data: session, isPending } = useSession();
+  const { session, loading: isPending } = useAuth();
   const [data, setData] = useState<ReferencePersonalityData>({});
   const [layout, setLayout] = useState<'single' | 'double'>('double');
   const [openItems, setOpenItems] = useState<string[]>([]);

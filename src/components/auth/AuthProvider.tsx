@@ -42,49 +42,19 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const checkSession = async () => {
       try {
-        // Check for ConsentKeys session token
-        const sessionToken = document.cookie
-          .split('; ')
-          .find((row) => row.startsWith('session_token='));
-
-        if (sessionToken) {
-          // Fetch session data from API
-          const response = await fetch('/api/auth/session');
-          if (response.ok) {
-            const sessionData = await response.json();
+        // Fetch session data from API
+        // The session_token cookie is httpOnly so we can't read it from JS.
+        // The server-side /api/auth/session route reads it automatically.
+        const response = await fetch('/api/auth/session');
+        if (response.ok) {
+          const sessionData = await response.json();
+          if (sessionData && sessionData.user) {
             setSession(sessionData);
           } else {
             setSession(null);
           }
         } else {
-          // Check for temporary ConsentKeys session (legacy)
-          const tempUserCookie = document.cookie
-            .split('; ')
-            .find((row) => row.startsWith('temp_user='));
-
-          if (tempUserCookie) {
-            try {
-              const tempUser = JSON.parse(
-                decodeURIComponent(tempUserCookie.split('=')[1])
-              );
-              setSession({
-                user: tempUser,
-                session: {
-                  id: 'temp_session',
-                  userId: tempUser.id,
-                  expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000), // 24 hours
-                  token: 'temp_token',
-                  createdAt: new Date(),
-                  updatedAt: new Date(),
-                },
-              });
-            } catch (e) {
-              console.error('Error parsing temp user cookie:', e);
-              setSession(null);
-            }
-          } else {
-            setSession(null);
-          }
+          setSession(null);
         }
       } catch (error) {
         console.error('Error checking session:', error);
